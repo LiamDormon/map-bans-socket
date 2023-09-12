@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSGO Map Bans</title>
+
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+    <link type="text/css" rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Room Invite Code:</h1>
+        <div class="copy-dock">
+            <span id="room-code">ABCD1234</span> 
+            <span class="material-symbols-outlined" id="copy-code"> content_copy </span>
+            <span class="material-symbols-outlined" id="copy-link"> link </span>
+        </div>
+    </header>
+    <div class="map-container">
+        <div class="map" id="mirage">
+            Mirage
+        </div>
+        <div class="map" id="anubis">
+            Anubis
+        </div class="map">
+        <div class="map" id="overpass">
+            Overpass
+        </div>
+        <div class="map" id="ancient">
+            Ancient
+        </div class="map">
+        <div class="map" id="nuke">
+            Nuke
+        </div class="map">
+        <div class="map" id="inferno">
+            Inferno
+        </div>
+        <div class="map" id="vertigo">
+            Vertigo
+        </div>
+    </div>
+</body>
+
+<script>
+    const socket = io("ws://localhost:3000", {
+        withCredentials: true,
+    })
+
+    window.onload = () => {
+        const roomCode = document.getElementById('room-code')
+        const urlParams = new URLSearchParams(window.location.search)
+        const code = urlParams.get('code')
+        roomCode.innerText = code
+    }
+
+
+    const copyCode = document.getElementById('copy-code')
+    const copyLink = document.getElementById('copy-link')
+    copyCode.addEventListener('click', () => {
+        const roomCode = document.getElementById('room-code')
+        navigator.clipboard.writeText(roomCode.innerText)
+    })
+
+    copyLink.addEventListener('click', () => {
+        navigator.clipboard.writeText(window.location.href)
+    })
+
+    tippy('#copy-code', {
+        content: 'Copy Invite Code',
+        placement: 'bottom'
+    })
+
+    tippy('#copy-link', {
+        content: 'Copy Invite Link',
+        placement: 'bottom'
+    })
+</script>
+</html>

@@ -104,3 +104,120 @@ button:active,
 button:focus {
     background: var(--accent-10);
 }
+
+h1 {
+    color: #fff;
+    text-align: center;
+    font-size: 2.5rem;
+    text-shadow: black 1px 1px 1px;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.copy-dock {
+    background-color: var(--background-10);
+    border-radius: 10px;
+    color: #ccc;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem;
+}
+
+#room-code {
+    color: #ccc;
+}
+
+#copy-code,
+#copy-link {
+    cursor: pointer;
+}
+
+#copy-code:hover,
+#copy-link:hover {
+    color: var(--accent);
+}
+
+.map-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2vh;
+    width: 40vw;
+}
+
+.map {
+    width: 80%;
+    height: 10vh;
+
+    display: grid;
+    place-items: center;
+
+    font-size: x-large;
+    color: white;
+    text-shadow: 0 0 5px black;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    border: solid 3px var(--background-30);
+    box-shadow: 0 0 5px black;
+
+    z-index: 1;
+}
+
+#mirage { background-image: url(https://i.ibb.co/h2TTjZT/mirage.webp); }
+#anubis { background-image: url(https://i.ibb.co/vm1P268/CS2-Anubis-B-site.webp); }
+#ancient { background-image: url(https://i.ibb.co/9HkYkxH/ancient.webp); }
+#inferno {background-image: url(https://i.ibb.co/ZxvDG81/inferno.webp); }
+#nuke { background-image: url(https://i.ibb.co/vHwf9Ky/nuke.webp); }
+#overpass { background-image: url(https://i.ibb.co/vj264tK/overpass.webp); }
+#vertigo { background-image: url(https://i.ibb.co/52YXNQz/vertigo.webp); }
+
+.banned::before {
+    content: "";
+    background-color: rgba(143, 0, 0, 0.555);
+    z-index: 3;
+    width: 32vw;
+    height: 10vh;
+
+    position: absolute;
+}
+
+.team1::after {
+    content: "\2771";
+    position: absolute;
+    font-size: xx-large;
+    color: white;
+    width: 38vw;
+    height: 10vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+    z-index: 4;
+}
+
+.team2::after {
+    content: "\2770";
+    position: absolute;
+    font-size: xx-large;
+    color: white;
+    width: 38vw;
+    height: 10vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: right;
+
+    z-index: 4;
+}

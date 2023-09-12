@@ -60,7 +60,7 @@ app.get("/room", (req, res) => {
         return res.sendStatus(403)
     }
 
-    res.status(200).send("booya!")
+    res.status(200).sendFile(join(__dirname, "../public/room.html"))
 })
 
 io.on('connection', (socket) => {
