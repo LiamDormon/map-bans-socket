@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    --background-10: hsl(0, 0%, 10%);
+    --background-15: hsl(0, 0%, 15%);
+    --background-20: hsl(0, 0%, 20%);
+    --background-25: hsl(0, 0%, 25%);
+    --background-30: hsl(0, 0%, 25%);
+
+    --accent: hsl(22, 80%, 50%);
+    --accent-10: hsl(22, 80%, 45%);
+}
+
+body {
+    background-color: var(--background-15);
+    min-height: 100vh;
+    min-width: 100vw;
+
+    display: grid;
+    place-items: center;
+
+    font-family: 'Roboto', sans-serif;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    background-color: var(--background-10);
+    color: #ccc;
+    width: 100%;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.container {
+    height: 40vh;
+    width: 40vw;
+    background-color: var(--background-20);
+    border-radius: 10px;
+    box-shadow: rgb(31, 31, 31) 0 0 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
+.container h1 {
+    color: #ccc;
+    text-align: center;
+    padding-top: 1rem;
+    margin-bottom: 3rem;
+
+    font-size: 2.5rem;
+    text-shadow: black 1px 1px 1px;
+}
+
+form {
+    width: 60%;
+}
+
+.join-form {
+    display: flex;
+    flex-direction: row;
+    gap: 1ch;
+    justify-content: center;
+}
+
+input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 80%;
+    height: 3rem;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+button {
+    font-family: "Roboto", sans-serif;
+    height: 3rem;
+    outline: 0;
+    background: var(--accent);
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    text-align: center;
+    cursor: pointer;
+}
+
+.create-form button {
+    min-width: 100%;
+    font-size: 1.2rem;
+}
+
+button:hover,
+button:active,
+button:focus {
+    background: var(--accent-10);
+}

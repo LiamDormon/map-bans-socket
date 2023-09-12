@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+    <title>Map Bans</title>
+    <link rel="icon" href="https://www.counter-strike.net/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <h1> Counter-Strike Map Bans </h1>
+        
+        <form class="join-form" action="room">
+            <input type="text" id="code" name="code" placeholder="Join Code" required>
+            <button id="submit-btn" type="submit"><span class="material-symbols-outlined">login</span></button>
+        </form>
+
+        <form class="create-form">
+            <button id="create-btn" type="submit">CREATE</button>
+        </form>
+    </div>
+
+    <footer>
+        &copy; 2023 Liam Dormon
+    </footer>
+
+    <script defer>
+        const socket = io("ws://localhost:3000", {
+            withCredentials: true,
+        })
+        
+        const createBtn = document.getElementById('create-btn')
+        createBtn.addEventListener('click', (e) => {
+            e.preventDefault()
+            socket.emit('create-room')
+        })
+
+        socket.on("successfully created", (roomId) => {
+            window.location.href = `room?code=${roomId}`
+        })
+    </script>
+</body>
+</html>
