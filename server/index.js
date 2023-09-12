@@ -72,6 +72,32 @@ io.on('connection', (socket) => {
 
         socket.emit("successfully created", roomId)
     })
+
+    socket.on("join-room", (roomId) => {
+        socket.join(roomId)
+
+        const room = rooms.get(roomId)
+
+        socket.emit("init", {
+            team: room.teamA === socket.handshake.session.id ? 0 : 1,
+            turn: room.turn,
+            status: room.maps
+        })
+    })
+
+    socket.on("ban", (roomId, index) => {
+        const user = socket.handshake.session.id
+        const room = rooms.get(roomId)
+        const team = room.teamA === user ? 0 : 1
+        room.takeTurn(index, team)
+
+        console.log(room)
+
+        io.to(roomId).emit("update", {
+            turn: room.turn,
+            status: room.maps
+        })
+    })
 });
 
 

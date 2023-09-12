@@ -46,6 +46,7 @@ footer {
     flex-direction: column;
     justify-items: center;
     align-items: center;
+    justify-content: center;
 }
 
 .container h1 {

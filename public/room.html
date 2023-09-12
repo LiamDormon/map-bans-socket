@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSGO Map Bans</title>
+    <title>Map Bans</title>
+    <link rel="icon" href="https://www.counter-strike.net/favicon.ico" type="image/x-icon">
 
     <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -50,15 +51,58 @@
 </body>
 
 <script>
+    let myTeam = null
+    let myTurn = false
+
     const socket = io("ws://localhost:3000", {
         withCredentials: true,
     })
+
+    socket.on("init", ({team, turn, status}) => {
+        myTeam = team
+        myTurn = team == turn
+
+        const maps = document.querySelectorAll('.map')
+
+        maps.forEach((map, index) => {
+            if(status[index]?.banned) {
+                map.classList.add('banned')
+                map.classList.add(status[index].bannedBy == 0 ? 'team1' : 'team2')
+            }
+        })
+    })
+
+    socket.on("update", ({turn, status}) => {
+        myTurn = myTeam == turn
+
+        const maps = document.querySelectorAll('.map')
+
+        maps.forEach((map, index) => {
+            if(status[index]?.banned) {
+                map.classList.add('banned')
+                map.classList.add(status[index].bannedBy == 0 ? 'team1' : 'team2')
+            }
+        })
+    })
+
+    const maps = document.querySelectorAll('.map')
+    const roomCode = document.getElementById('room-code')
+    maps.forEach((map, index) => {
+        map.addEventListener('click', () => {
+            if(myTurn) {
+                socket.emit('ban', roomCode.innerText, index)
+            }
+        })
+    })
+    
 
     window.onload = () => {
         const roomCode = document.getElementById('room-code')
         const urlParams = new URLSearchParams(window.location.search)
         const code = urlParams.get('code')
         roomCode.innerText = code
+
+        socket.emit('join-room', code)
     }
 
 
