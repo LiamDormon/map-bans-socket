@@ -48,11 +48,30 @@
             Vertigo
         </div>
     </div>
+
+    <div class="team-pick-container">
+        <div class="background-image" id="mirage"></div>
+        <div class="team-pick">
+            <span class="ct">
+                <img src="https://i.ibb.co/Cn9wJrT/Ct-patch-small.webp" alt="CT">
+            </span>
+            <div class="team-pick-text">
+                <h2> <span id="picked-map"> Mirage </span> has been picked </h2>
+                <h3>Choose a side</h3>
+            </div>
+            <span class="t">
+                <img src="https://i.ibb.co/n1XQTRp/Icon-t-patch-small.webp" alt="T">
+            </span>
+        </div>
+    </div>
 </body>
 
 <script>
     let myTeam = null
     let myTurn = false
+    let winningMap = 0
+
+    const mapNames = ["mirage", "anubis", "overpass", "ancient", "nuke", "inferno", "vertigo"]
 
     const socket = io("ws://localhost:3000", {
         withCredentials: true,
@@ -85,6 +104,33 @@
         })
     })
 
+    socket.on("end condition", ({map}) => {
+        winningMap = map.id
+
+        if (!myTurn) {
+            return
+        }
+
+        const tpContainter = document.querySelector(".team-pick-container")
+        tpContainter.style.visibility = "visible"
+
+        const tpImage = document.querySelector(".background-image")
+        tpImage.setAttribute("id", mapNames[map.id])
+
+        const tpLabel = document.getElementById("picked-map")
+        tpLabel.innerText = mapNames[map.id]
+    })
+
+    socket.on("start", ({side}) => {
+        let myStartSide = "ct"
+        if (myTurn) {
+            myStartSide = side
+        } else {
+            myStartSide = side === "ct" ? "t" : "ct"
+        }
+        alert(`The map played will be ${mapNames[winningMap]}, you will be starting on the ${myStartSide.toUpperCase()} side`)
+    })
+
     const maps = document.querySelectorAll('.map')
     const roomCode = document.getElementById('room-code')
     maps.forEach((map, index) => {
@@ -115,6 +161,26 @@
 
     copyLink.addEventListener('click', () => {
         navigator.clipboard.writeText(window.location.href)
+    })
+
+    const t = document.querySelector(".t")
+    const ct = document.querySelector(".ct")
+    t.addEventListener('click', () => {
+        if(myTurn) {
+            socket.emit('pick side', winningMap, "t")
+        }
+
+        const tpContainter = document.querySelector(".team-pick-container")
+        tpContainter.style.visibility = "hidden"
+    })
+
+    ct.addEventListener('click', () => {
+        if(myTurn) {
+            socket.emit('pick side', roomCode.innerText, "ct")
+        }
+
+        const tpContainter = document.querySelector(".team-pick-container")
+        tpContainter.style.visibility = "hidden"
     })
 
     tippy('#copy-code', {

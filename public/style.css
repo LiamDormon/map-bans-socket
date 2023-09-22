@@ -9,6 +9,14 @@
 
     --accent: hsl(22, 80%, 50%);
     --accent-10: hsl(22, 80%, 45%);
+
+    --mirage: url(https://i.ibb.co/h2TTjZT/mirage.webp);
+    --anubis: url(https://i.ibb.co/vm1P268/CS2-Anubis-B-site.webp);
+    --ancient: url(https://i.ibb.co/9HkYkxH/ancient.webp);
+    --inferno: url(https://i.ibb.co/ZxvDG81/inferno.webp);
+    --nuke: url(https://i.ibb.co/vHwf9Ky/nuke.webp);
+    --overpass: url(https://i.ibb.co/vj264tK/overpass.webp);
+    --vertigo: url(https://i.ibb.co/52YXNQz/vertigo.webp);
 }
 
 body {
@@ -175,13 +183,13 @@ header {
     z-index: 1;
 }
 
-#mirage { background-image: url(https://i.ibb.co/h2TTjZT/mirage.webp); }
-#anubis { background-image: url(https://i.ibb.co/vm1P268/CS2-Anubis-B-site.webp); }
-#ancient { background-image: url(https://i.ibb.co/9HkYkxH/ancient.webp); }
-#inferno {background-image: url(https://i.ibb.co/ZxvDG81/inferno.webp); }
-#nuke { background-image: url(https://i.ibb.co/vHwf9Ky/nuke.webp); }
-#overpass { background-image: url(https://i.ibb.co/vj264tK/overpass.webp); }
-#vertigo { background-image: url(https://i.ibb.co/52YXNQz/vertigo.webp); }
+#mirage { background-image: var(--mirage); }
+#anubis { background-image:var(--anubis); }
+#ancient { background-image: var(--ancient); }
+#inferno {background-image: var(--inferno); }
+#nuke { background-image: var(--nuke); }
+#overpass { background-image: var(--overpass); }
+#vertigo { background-image: var(--vertigo); }
 
 .banned::before {
     content: "";
@@ -221,4 +229,79 @@ header {
     justify-content: right;
 
     z-index: 4;
+}
+
+.team-pick-container {
+    position: absolute;
+    height: 30vh;
+    width: 40vw;
+    background-color: var(--background-20);
+    box-shadow: rgb(31, 31, 31) 0 0 10px;
+    border-radius: 5px;
+    z-index: 5;
+
+    visibility: hidden;
+}
+
+.background-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    opacity: 0.3;
+}
+
+.team-pick {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 7;
+
+    padding: 1rem;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.team-pick-text {
+    color: #ccc;
+    display: grid;
+    text-align: center;
+
+    padding: 0.3rem;
+}
+
+.team-pick-text > h2 {
+    color: #fff;
+    text-shadow: black 1px 1px 1px;
+    font-size: 2rem;
+
+    margin-bottom: 0.5rem;
+}
+
+.t,
+.ct {
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.ct:hover {
+    box-shadow: rgb(42, 88, 148) 0 0 10px 10px;
+}
+
+.t:hover {
+    box-shadow: rgb(131, 118, 61) 0 0 10px 10px;
+}
+
+#picked-map {
+    text-transform: capitalize;
+    text-shadow: var(--accent) 1px 1px 1px;
 }

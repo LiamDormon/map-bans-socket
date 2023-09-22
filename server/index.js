@@ -54,8 +54,6 @@ app.get("/room", (req, res) => {
         room.teamB = req.session.id
     }
 
-    console.log(room)
-
     if (room.teamA !== req.session.id && room.teamB !== req.session.id) {
         return res.sendStatus(403)
     }
@@ -91,12 +89,28 @@ io.on('connection', (socket) => {
         const team = room.teamA === user ? 0 : 1
         room.takeTurn(index, team)
 
-        console.log(room)
-
         io.to(roomId).emit("update", {
             turn: room.turn,
             status: room.maps
         })
+
+        if (room.endCondition()) {
+            io.to(roomId).emit("end condition", {
+                map: room.map
+            })
+        }
+    })
+
+    socket.on("pick side", (roomId, side) => {
+        const user = socket.handshake.session.id
+        const room = rooms.get(roomId)
+        const team = room.teamA === user ? 0 : 1
+
+        if (room.setStartingSide(team, side)) {
+            io.to(roomId).emit("start", {
+                side: room.startingSide
+            })
+        }
     })
 });
 
