@@ -8,12 +8,13 @@ const { createServer } = require("node:http")
 const {join} = require("node:path")
 const crypto = require("node:crypto")
 const Room = require("./room")
+require("dotenv").config()
 
 const app = express()
 const server = createServer(app)
 const io = new Server(server);
 
-const secret = "ASfdASDgfASEDtSDgSDGsdfg34612asC"
+const secret = process.env.SECRET
 
 app.use(express.static(join(__dirname, "../public")))
 app.use(cookieParser(secret))
