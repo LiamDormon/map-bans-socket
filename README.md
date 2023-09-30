@@ -4,13 +4,13 @@ A quick and dirty (needs optimisation) solution for picking a map to play in a B
 
 # Screenshots
 
-![Landing Page](https://i.ibb.co/RCqv434/image.png)
+![Landing Page](https://i.imgur.com/1A0N0OY.png)
 
 Once both clients are connected they take turns to ban maps until only one remains.
-![Ban Phase](https://i.ibb.co/gjNfRK5/image.png)
+![Ban Phase](https://i.imgur.com/ptVG05D.png)
 
 Instead of banning a map, the client with the last turn decides which side they start from.
-![Map Select Phase](https://i.ibb.co/gJLjn3f/image.png)
+![Map Select Phase](https://i.imgur.com/q4zcut2.png)
 
 # How to run?
 
