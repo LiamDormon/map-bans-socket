@@ -20,7 +20,8 @@
 }
 
 body {
-    background-color: var(--background-15);
+    background: var(--background-15);
+    background: linear-gradient(90deg, var(--background-10) 0%, var(--background-20) 100%);;
     min-height: 100vh;
     min-width: 100vw;
 
