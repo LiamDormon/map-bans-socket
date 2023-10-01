@@ -111,6 +111,13 @@ io.on('connection', (socket) => {
             io.to(roomId).emit("start", {
                 side: room.startingSide
             })
+
+            setTimeout(() => {
+                // Cleanup after room is finished, 
+                // prevents memory leak
+                rooms.delete(roomId)
+                io.in(roomId).disconnectSockets(true)
+            }, 1000 * 60 * 10) // 10 Minutes
         }
     })
 });
